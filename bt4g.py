@@ -62,7 +62,7 @@ class bt4g(object):
         while pagenumber <= 10:
             result_page = self.search_page(term, pagenumber, cat)            
             self.pretty_print_results(result_page)
-            if len(result_page) < 15 or result_page[-1]['seeders'] == 0:
+            if len(result_page) < 15 or result_page[-1]['seeders'] < 1:
                 break
             pagenumber = pagenumber + 1
 
