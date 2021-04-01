@@ -1,4 +1,4 @@
-# VERSION: 1.00
+# VERSION: 1.01
 # AUTHORS: kjjejones44
 
 from html.parser import HTMLParser
@@ -77,7 +77,7 @@ class bt4g(object):
     def download_torrent(self, info):
         if "trackerlist" not in self.__dict__:
             self.trackerlist = json.loads(retrieve_url("https://downloadtorrentfile.com/trackerlist"))
-        magnet = f"magnet:?xt=urn:btih:{info.split('/')[-1]}&tr=" + "%tr=".join(self.trackerlist)
+        magnet = f"magnet:?xt=urn:btih:{info.split('/')[-1]}&tr=" + "&tr=".join(self.trackerlist)
         print(magnet + ' ' + info)
 
     def pretty_print_results(self, results):
