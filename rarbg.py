@@ -11,6 +11,8 @@ class rarbg(object):
     
     url = "https://rarbg.to/"
     name = "rarbg"
+    
+    supported_categories = {'all': [], 'movies': [14, 17, 42, 44, 45, 46, 47, 48, 50, 51, 52, 54], 'tv': [18, 41, 49], 'music': [23, 24, 25, 26], 'games': [27, 28, 29, 30, 31, 32, 40], 'software': [33]}
 
     def __init__(self): 
         helpers.headers["Cookie"] = "tcc; gaDts48g=q8h5pp9t; aby=2; skt=WA28Vph1yq; skt=WA28Vph1yq; gaDts48g=q8h5pp9t; expla=2"     
@@ -76,7 +78,8 @@ class rarbg(object):
 
     def search_page(self, term, pagenumber, cat):
         try:
-            query = f"{self.url}torrents.php?search={term}&order=seeders&by=DESC&page={pagenumber}"
+            cat_string = "".join([f"&category%5B%5D={x}" for x in self.supported_categories.get(cat, "")])
+            query = f"{self.url}torrents.php?search={term}&order=seeders&by=DESC&page={pagenumber}{cat_string}"
             parser = self.MyHTMLParser()
             text = helpers.retrieve_url(query)
             parser.feed(text)
